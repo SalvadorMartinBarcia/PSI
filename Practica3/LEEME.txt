@@ -1,0 +1,49 @@
+
+Autores---------Grupo 1361
+    Javier Lougedo Lorente
+    Salvador Martin Barcia
+
+
+Fecha: 17-noviembre-2019
+
+
+La URL de heroku es: https://pure-chamber-59581.herokuapp.com/
+
+
+A continuación comentamos unas pocas decisiones de diseño que hemos tenido que tomar:
+
+    -En primer lugar, hemos tenido que prescindir de los decoradores de @login_required,
+     ya que los mismos nos daban problemas con los tests y su redirección no funcionaba
+     como era de esperar. De esta manera, la alternativa que encontramos se puede observar
+     en cada una de las funciones de views, donde podemos ver como hemos "rodeado" las
+     funciones comprobando si el usuario estaba registrado (donde devolvíamos la función
+     en sí) o no, donde lo que hacíamos era devolverle la página de login con el formulario.
+     Así, hemos conseguido que funcione adecuadamente, pero prescindiendo de los decoradores.
+
+    -Por otro lado, hemos decidido que no implementaremos tests adicionales, ya que tras
+     ejecutar el coverage, a partir del cual pretendíamos realizar los tests adicionales,
+     nos dímos cuenta de que el mismo ya era bastante alto, de un 90%, y las pocas líneas
+     que faltaban por cubrir estaban mayoritariamente en ficheros que no podemos ni debemos
+     tocar (wsgi.py o manage.py). Si bien es cierto que models.py podríamos probarlo un poco
+     más, no lo vemos necesario.
+
+    -Respecto al punto anterior, en coverage.txt se encuentra el coverage de nuestra aplicación.
+
+    -Mencionar por último que, en la medida de lo posible, hemos tratado de emplear funciones
+     de Django en lugar de crearlas nosotros, con mayor o menor éxito, y que hemos tratado de
+     probar nuestra app tanto en local (más duro debido a los cambios de sesión) como en Heroku,
+     donde inicialmente nos encontramos con diversos problemas.
+
+    -Hemos implementado Counter correctamente, según creemos, pero inicialmente tuvimos muchas
+     dudas sobre que implementación del singleton llevar a cabo, ya que por lo visto en Internet
+     no está muy bien definido cual de ellas es mas correcta en python.
+
+    -Sobre autoevaluación, cabe comentar dos cosas:
+        -En primer lugar, no estamos seguros de comprobar adecuadamente y asignar un ganador en
+         una partida. Hemos trabajado, principalmente, alrededor de los tests y no estamos
+         seguros de hacer esa comprobación adecuadamente.
+        -En segundo lugar, tenemos muy ocasionalmente algunos KeyError (al clickar en show selected
+         game and play sin haber hecho antes select game) que no deberían de dar. En ellos, salta
+         el debugger de Heroku que hemos decidido no inhabilitar de momento.
+
+

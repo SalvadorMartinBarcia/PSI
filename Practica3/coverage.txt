@@ -1,0 +1,34 @@
+Hemos decidido no llevar a cabo ningún test adicional debido a que ya tenemos un
+coverage del 92% general y del 90, 99 y 100 por ciento en models, views y forms,
+respectivamente, que son aquellos en los que se encuentra nuestro código.
+
+Sin ir más lejos, en la anterior práctica se nos dice que lo ideal es mantener un
+coverage por encima del 75%, como es nuestro caso, faltándonos tan solo unas pocas
+línas muy ocasionalmente.
+
+Name                                              Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------------------
+datamodel/__init__.py                                 0      0   100%
+datamodel/admin.py                                    1      0   100%
+datamodel/apps.py                                     3      3     0%   1-5
+datamodel/constants.py                               13      0   100%
+datamodel/migrations/0001_initial.py                  8      0   100%
+datamodel/migrations/0002_auto_20191116_1812.py       6      0   100%
+datamodel/migrations/__init__.py                      0      0   100%
+datamodel/models.py                                 158     16    90%   84, 116-117, 127-132, 135-136, 142-143, 168-171, 216
+datamodel/views.py                                    1      1     0%   1
+logic/__init__.py                                     0      0   100%
+logic/admin.py                                        1      1     0%   1
+logic/apps.py                                         3      3     0%   1-5
+logic/forms.py                                       31      0   100%
+logic/migrations/__init__.py                          0      0   100%
+logic/models.py                                       1      1     0%   1
+logic/urls.py                                         3      0   100%
+logic/views.py                                      149      2    99%   96-97
+manage.py                                            12      2    83%   11-12
+ratonGato/__init__.py                                 0      0   100%
+ratonGato/settings.py                                29      1    97%   84
+ratonGato/urls.py                                     3      0   100%
+ratonGato/wsgi.py                                     5      5     0%   10-17
+-------------------------------------------------------------------------------
+TOTAL                                               427     35    92%
