@@ -1,0 +1,189 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token }}">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/grid.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loading.css' %}">
+	<link rel="stylesheet" href="{% static 'css/snow.css' %}">
+    <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+		function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+			return (/^(GET|HEAD|OPTIONS)$/.test(method));
+		}
+
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("anti-csrf-token", csrf_token);
+				}
+			}
+		});
+	</script>
+    {% block extra_css %}
+    {% endblock extra_css %}
+
+    {% block extra_js %}
+    
+    {% endblock extra_js %}
+
+    {% block extra_head %}
+    
+    {% endblock extra_head %}
+    <title>{% block title %}Avalanche Escape!{% endblock %}</title>
+
+</head>
+
+<body class="demo-1">
+
+<div class="container">
+	
+    <svg class="hidden">
+        <symbol id="icon-home" viewBox="0 0 20 20">
+            <title>Inicio</title>
+            <path d="M15.971,7.708l-4.763-4.712c-0.644-0.644-1.769-0.642-2.41-0.002L3.99,7.755C3.98,7.764,3.972,7.773,3.962,7.783C3.511,8.179,3.253,8.74,3.253,9.338v6.07c0,1.146,0.932,2.078,2.078,2.078h9.338c1.146,0,2.078-0.932,2.078-2.078v-6.07c0-0.529-0.205-1.037-0.57-1.421C16.129,7.83,16.058,7.758,15.971,7.708z M15.68,15.408c0,0.559-0.453,1.012-1.011,1.012h-4.318c0.04-0.076,0.096-0.143,0.096-0.232v-3.311c0-0.295-0.239-0.533-0.533-0.533c-0.295,0-0.534,0.238-0.534,0.533v3.311c0,0.09,0.057,0.156,0.096,0.232H5.331c-0.557,0-1.01-0.453-1.01-1.012v-6.07c0-0.305,0.141-0.591,0.386-0.787c0.039-0.03,0.073-0.066,0.1-0.104L9.55,3.75c0.242-0.239,0.665-0.24,0.906,0.002l4.786,4.735c0.024,0.033,0.053,0.063,0.084,0.09c0.228,0.196,0.354,0.466,0.354,0.76V15.408z"></path>
+		</symbol>
+    	<symbol id="icon-login" viewBox="0 0 20 20">
+            <title>Iniciar Sesión</title>
+			<path d="M15.608,6.262h-2.338v0.935h2.338c0.516,0,0.934,0.418,0.934,0.935v8.879c0,0.517-0.418,0.935-0.934,0.935H4.392c-0.516,0-0.935-0.418-0.935-0.935V8.131c0-0.516,0.419-0.935,0.935-0.935h2.336V6.262H4.392c-1.032,0-1.869,0.837-1.869,1.869v8.879c0,1.031,0.837,1.869,1.869,1.869h11.216c1.031,0,1.869-0.838,1.869-1.869V8.131C17.478,7.099,16.64,6.262,15.608,6.262z M9.513,11.973c0.017,0.082,0.047,0.162,0.109,0.226c0.104,0.106,0.243,0.143,0.378,0.126c0.135,0.017,0.274-0.02,0.377-0.126c0.064-0.065,0.097-0.147,0.115-0.231l1.708-1.751c0.178-0.183,0.178-0.479,0-0.662c-0.178-0.182-0.467-0.182-0.645,0l-1.101,1.129V1.588c0-0.258-0.204-0.467-0.456-0.467c-0.252,0-0.456,0.209-0.456,0.467v9.094L8.443,9.553c-0.178-0.182-0.467-0.182-0.645,0c-0.178,0.184-0.178,0.479,0,0.662L9.513,11.973z"></path>
+		</symbol>
+		<symbol id="icon-logout" viewBox="0 0 20 20">
+            <title>Cerrar Sesión</title>
+			<path d="M8.416,3.943l1.12-1.12v9.031c0,0.257,0.208,0.464,0.464,0.464c0.256,0,0.464-0.207,0.464-0.464V2.823l1.12,1.12c0.182,0.182,0.476,0.182,0.656,0c0.182-0.181,0.182-0.475,0-0.656l-1.744-1.745c-0.018-0.081-0.048-0.16-0.112-0.224C10.279,1.214,10.137,1.177,10,1.194c-0.137-0.017-0.279,0.02-0.384,0.125C9.551,1.384,9.518,1.465,9.499,1.548L7.76,3.288c-0.182,0.181-0.182,0.475,0,0.656C7.941,4.125,8.234,4.125,8.416,3.943z M15.569,6.286h-2.32v0.928h2.32c0.512,0,0.928,0.416,0.928,0.928v8.817c0,0.513-0.416,0.929-0.928,0.929H4.432c-0.513,0-0.928-0.416-0.928-0.929V8.142c0-0.513,0.416-0.928,0.928-0.928h2.32V6.286h-2.32c-1.025,0-1.856,0.831-1.856,1.856v8.817c0,1.025,0.832,1.856,1.856,1.856h11.138c1.024,0,1.855-0.831,1.855-1.856V8.142C17.425,7.117,16.594,6.286,15.569,6.286z"></path>
+		</symbol>
+		<symbol id="icon-signup" viewBox="0 0 20 20">
+            <title>Registrarse</title>
+			<path d="M14.013,4.93h-0.997c-0.134-1.315-1.093-2.387-2.358-2.668V1.16c0-0.364-0.294-0.657-0.657-0.657c-0.363,0-0.657,0.293-0.657,0.657v1.102C8.077,2.543,7.118,3.615,6.984,4.93H5.987c-0.363,0-0.657,0.292-0.657,0.657v2.005c0,0.341,0.264,0.614,0.598,0.644V18.84c0,0.365,0.294,0.657,0.657,0.657h6.829c0.363,0,0.657-0.292,0.657-0.657V8.236c0.334-0.031,0.598-0.303,0.598-0.644V5.587C14.67,5.222,14.376,4.93,14.013,4.93z M7.243,18.182V8.249h5.515v9.933H7.243z"></path>
+		</symbol>
+	</svg>
+    <main>
+        <div class="message">To see properly, please view on a larger screen.</div>
+        <div class="content content--fixed">
+            <header class="codrops-header">
+                <div class="codrops-links">
+                    <a class="codrops-icon codrops-icon--prev" href="{% url 'index' %}" title="Inicio"><svg class="icon icon--home"><use xlink:href="#icon-home"></use></svg></a>
+                </div>
+                <h1 class="codrops-header__title">Avalanche Escape!</h1>
+                <span class="author"> By <a href="https://video-images.vice.com/articles/5959ef72963827600760e7ae/lede/1499066497854-1498660752195-DSC00715.jpeg?crop=0.9975308641975308xw:1xh;center,center&resize=700:*">Salvador Martin</a> & <a href="https://jlougedo.github.io">Javier Lougedo</a>.</span>
+            </header>
+            <nav class="user">
+                {% if request.user.is_authenticated %}
+                    Bienvenido,&nbsp<span class="username"><a class="demo" href="https://projekt.webvicas.dk/">{{ request.user.username }}</a></span>! Feliz Navidad!
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon--prev" href="{% url 'logout' %}" title="Cerrar sesión"><svg class="icon icon--logout"><use xlink:href="#icon-logout"></use></svg></a>
+					</div>
+                {% else %}
+                    Aún no has iniciado sesión! -&nbsp
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon--prev" href="{% url 'login' %}" title="Iniciar sesión"><svg class="icon icon--login"><use xlink:href="#icon-login"></use></svg></a>
+					</div>
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon--prev" href="{% url 'signup' %}" title="Crear cuenta"><svg class="icon icon--signup"><use xlink:href="#icon-signup"></use></svg></a>
+					</div>
+                {% endif %}
+            </nav>
+            <button class="menu-trigger">Menú</button>
+			<p class="counter">Sesión --><b> {{ counter_session }} </b> &nbsp&nbsp&nbsp Global --><b> {{ counter_global }} </b></p>
+
+
+
+        {% block content %}
+        {% endblock content %}
+
+        </div>
+
+		<nav class="grim">
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--1"></div>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--2"></div>
+				<div class="grim__item-content">
+					<div class="grim__item-inner">
+						<button class="menu-trigger menu-trigger--close"><i class="glyphicon glyphicon-remove" style="color: white;"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--3"></div>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--4"></div>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--5"></div>
+				<button onclick="location.href='{% url 'select_view' %}'" type="button" class="grim__button grim__item-content">
+					<div class="grim__item-inner">
+						<h3 class="grim__item-title" style="font-size:1.5vw;">Ver juego</h3>
+						<span class="grim__item-desc" style="font-size:.75vw;">Escoge el juego finalizado que ver</span>
+					</div>
+				</button>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--6"></div>
+				<button onclick="location.href='{% url 'select_game' %}'" type="button" class="grim__button grim__item-content">
+					<div class="grim__item-inner">
+						<h3 class="grim__item-title" style="font-size:1.5vw;">Escoger</h3>
+						<span class="grim__item-desc" style="font-size:.75vw;">Selecciona el juego que aparecerá en la pestaña de la derecha</span>
+					</div>
+				</button>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--7"></div>
+				<button onclick="location.href='{% url 'play_game' %}'" type="button" class="grim__button grim__item-content">
+					<div class="grim__item-inner">
+						<h3 class="grim__item-title">Continuar viendo</h3>
+						<span class="grim__item-desc">Revive el juego finalizado seleccionado</span>
+					</div>
+				</button>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--8"></div>
+				<button onclick="location.href='{% url 'select_join' %}'" type="button" class="grim__button grim__item-content">
+					<div class="grim__item-inner">
+						<h3 class="grim__item-title">Jugar como Alpinista</h3>
+						<span class="grim__item-desc">Únete a un juego ya creado y sobrevive</span>
+					</div>
+				</button>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--9"></div>
+				<button onclick="location.href='{% url 'create_game' %}'" type="button" class="grim__button grim__item-content">
+					<div class="grim__item-inner">
+						<h3 class="grim__item-title">Jugar como Avalancha</h3>
+						<span class="grim__item-desc">Crea una Avalancha y acecha a un alpinista...</span>
+					</div>
+				</button>
+			</div>
+			<div class="grim__item">
+				<div class="grim__item-bg grim__item-bg--10" data-duration="1000" data-easing="easeOutQuint"></div>
+				<button onclick="location.href='{% url 'show_game' %}'" type="button" class="grim__button grim__item-content">
+					<div class="grim__item-inner">
+						<h3 class="grim__item-title">Ir al juego seleccionado</h3>
+						<span class="grim__item-desc">Visualiza o juega la partida escogida</span>
+					</div>
+				</button>
+			</div>
+		</nav>
+
+	</main>
+</div>
+<canvas id="canvas" style="background-image: url({% static 'img/background.jpg' %})"></canvas>
+
+<script src="{% static 'js/snow.js' %}"></script>
+<script src="{% static 'js/demo.js' %}"></script>
+<script src="{% static 'js/anime.min.js' %}"></script>
+<script src="{% static 'js/menu.js' %}"></script>
+</body>
+</html>

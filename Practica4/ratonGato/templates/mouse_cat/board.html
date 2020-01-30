@@ -1,0 +1,60 @@
+{% extends "mouse_cat/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div id="chess_board">
+
+
+    {% if game.cat_turn and game.cat_user == request.user  or not game.cat_turn and game.mouse_user == request.user%}
+        <h2 class="content__smalltitle text-center"> Tu turno, {{ request.user.username }}!</h2>
+    {% elif game.cat_user == request.user %}
+        <h2 class="content__smalltitle text-center"> {{ game.mouse_user.username }}, esta jugando... </h2>
+    {% else %}
+        <h2 class="content__smalltitle text-center"> {{ game.cat_user.username }}, esta jugando... </h2>
+    {% endif %}
+    {% if board %}
+            <table class="text-center" style="border-style:solid; border-width: 0.5vh;">
+            {% for item in board %}
+                {% if forloop.counter0|divisibleby:8 %}<tr>{% endif %}
+                <td id="{{ forloop.counter0 }}" class="td" style="width:3.5vw; height:3.5vw; background-color:snow; text-align:center;" ondrop="fin(event)" ondragover="allowDrop(event)">
+                    {% if item == -2 %} <img id="-{{ forloop.counter0 }}" src="{% static 'img/tree.svg' %}" class="treecell" draggable="false"> <!-- ARBOL -->
+                    {% elif item == 1 %}  <img id="-{{forloop.counter0 }}" src="{% static 'img/snowball.png' %}" class="snowcell" draggable="true" ondragstart="inicio(event)" ondrop="fin(event)" ondragover="allowDrop(event)"> <!-- Bola de nieve -->
+                    {% elif item == -1 %}  <img id="-{{ forloop.counter0}}" src="{% static 'img/alpinista.png' %}" class="adventurer" draggable="true" ondragstart="inicio(event)" ondrop="fin(event)" ondragover="allowDrop(event)">
+                    {% else %}
+                    {% endif %}
+                </td>
+                {% if forloop.counter|divisibleby:8 or forloop.last %}</tr>{% endif %}
+            {% endfor %}
+            </table>
+        <div id="waiting">
+        {% if game.cat_turn and game.cat_user == request.user or not game.cat_turn and game.mouse_user == request.user %}
+            <h3 class="content__info text-center">Te toca! Actualiza la pestaña y luego arrastra para mover. </h3>
+            <!-- Anticlimatico, pero es para que funcione bien por los JQUERY explicados en la memoria -->
+        {% else %}
+            <h3 class="content__info text-center">Esperando a tu contrincante... </h3>
+        {% endif %}
+        </div>
+    {% endif %}
+
+    <form class="hidden" id="move_form" method="post" action="{% url 'move' %}">
+        {% csrf_token %}
+        {% if game.cat_user.id == request.user.id %}
+            <blockquote class="cat">
+                {% if game.cat_turn %}
+                    {{ move_form }}
+                    <input type="submit" value="Move" />
+                {% endif %}
+            </blockquote>
+        {% endif %}
+        {% if game.mouse_user.id == request.user.id %}
+            <blockquote class="mouse">
+                {% if not game.cat_turn %}
+                    {{ move_form }}
+                    <input type="submit" value="Move" />
+                {% endif %}
+            </blockquote>
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}

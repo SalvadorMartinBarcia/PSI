@@ -1,0 +1,15 @@
+
+Autores---------Grupo 1361
+    Javier Lougedo Lorente
+    Salvador Martin Barcia
+
+
+Fecha: 13-diciembre-2019
+
+
+La URL de heroku es: https://pure-chamber-59581.herokuapp.com/
+
+
+Recomendamos encarecidamente leer la memoria.
+
+

@@ -1,0 +1,57 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+<div id="content-choosegame" class="content content__inner">
+    <h2 class="content__subtitle"> Selecciona la partida que quieres observar.</h2>
+    <h2 class="content__subtitle"> La avalancha acecha...</h2>
+    <h3 class="content__info"> Juegos terminados: </h3>
+        {% if ended %}
+            {% for game in ended %}
+                <div class="justify-content-center text-center center-block" style="color: #C0C0FF">
+                    <h4 class="content_text ">
+                        Revive el juego contra {{ game.cat_user }}! (ID -> {{ game.id }}) donde
+                        <!-- Victoria Raton -->
+                        {% if game.status == 3 and game.mouse_user.id == request.user.id or game.status == 4 and game.cat_user.id == request.user.id %}
+                            <p style="display:inline; color:limegreen;">ganaste!</p>
+                        {% else %}
+                            <p style="display:inline; color:red;">perdiste...</p>
+                        {% endif %}
+                        &nbsp - &nbsp
+                        <a class="list_element" style="display:inline;" href="{% url 'select_game' game.id %}">
+                            Cargar esta partida pasada!
+                        </a>
+                    </h4>
+                </div>
+            {% endfor %}
+            {% if ended.has_other_pages %}
+                <ul class="pagination pagination-m">
+                    {% if ended.has_previous %}
+                        <li class="page-item"><span>
+                            <a class="page-link" href="?page={{ended.number}}"> < </a>
+                        </span></li>
+                    {% else %}
+                        <li class="page-item disabled"><span>
+                            <a class="page-link" href="#"> < </a>
+                        </span></li>
+                    {% endif %}
+                    <!-- Hacemos así esto porque preferimos tener un tamaño definido a la posibilidad de 200 pags -->
+                    <!-- Aunque hace que sea más lento, es más estético y estable -->
+                    <!-- Lo propio sería hacer un bucle -->
+                        <li class="page-item"><span>{{ ended.number }}
+                        </span></li>
+                    {% if ended.has_next %}
+                        <li class="page-item"><span>
+                            <a class="page-link" href="?page={{ended.number}}"> > </a>
+                        </span></li>
+                    {% else %}
+                        <li class="page-item disabled"><span>
+                            <a class="page-link" href="#"> > </a>
+                        </span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        {% else %}
+            No hay juegos terminados... Usa el menú para iniciar uno y busca un amigo para vencerle!
+        {% endif %}
+</div>
+{% endblock content %}

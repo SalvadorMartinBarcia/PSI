@@ -1,0 +1,30 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+
+<div id="content-signup" class="content content__inner">
+
+    <h2 class="content__title"> Registrate! </h2>
+    <h3 class="content__subtitle"> Guardaremos bien tus datos... </h3>
+    <br/>
+    {% if user_form %}
+        <form id="user_form" class="form-container" method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div align="right">
+                {{ user_form.as_p }}
+            </div>
+            <br/>
+            <div class="button_container">
+            <button type="submit" name="submit" id="signup-button" value="Register" class="btn"><span> Allá voy! </span></button>
+        </div>
+        </form>
+    {% else %}
+        <p> Usuario creado con éxito. Bienvenido! </p>
+    {% endif %}
+
+</div>
+
+
+
+
+{% endblock content %}

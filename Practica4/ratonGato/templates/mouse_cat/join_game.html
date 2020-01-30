@@ -1,0 +1,18 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+<div id="content-joingame" class="content content__inner">
+
+    <h2 class="content__title"> Adelante, pionero alpinista! </h2>
+    <br/>
+    {% if msg_error %}
+        <p class="content__info"> Hubo un error! Este es el feedback disponible: </p>
+        <br>
+        <p class="error">{{ msg_error }}</p>
+    {% else %}
+        <p class="content__info">Alpinista &nbsp<b>{{ game.mouse_user.username }}</b>, te uniste a una partida con éxito (ID&nbsp<b>{{ game.id }}</b>)</p>
+        <br>
+        <p class="content__subtitle">A la <a href="{% url 'show_game' %}">aventura</a>, valiente!</p>
+    {% endif %}
+</div>
+{% endblock content %}

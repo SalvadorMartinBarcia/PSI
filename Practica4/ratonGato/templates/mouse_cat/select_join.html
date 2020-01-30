@@ -1,0 +1,47 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+<div id="content-choosegame" class="content content__inner">
+    <h2 class="content__subtitle"> Selecciona un juego al que unirte como alpinista.</h2>
+    <h2 class="content__subtitle"> La avalancha acecha...</h2>
+    <h3 class="content__info"> Juegos disponibles: </h3>
+        {% if available_games %}
+            <ul>
+            {% for game in available_games %}
+                <li class="games_list"> <a class="list_element" href="{% url 'join_game' game.id %}">
+                    Enfrentate a --> {{ game.cat_user }} - (ID:{{ game.id }})
+                </a></li>
+            {% endfor %}
+            </ul>
+            {% if available_games.has_other_pages %}
+                <ul class="pagination pagination-m">
+                    {% if available_games.has_previous %}
+                        <li class="page-item"><span>
+                            <a class="page-link" href="?page={{available_games.number}}"> < </a>
+                        </span></li>
+                    {% else %}
+                        <li class="page-item disabled"><span>
+                            <a class="page-link" href="#"> < </a>
+                        </span></li>
+                    {% endif %}
+                    <!-- Hacemos así esto porque preferimos tener un tamaño definido a la posibilidad de 200 pags -->
+                    <!-- Aunque hace que sea más lento, es más estético y estable -->
+                    <!-- Lo propio sería hacer un bucle -->
+                        <li class="page-item"><span>{{ available_games.number }}
+                        </span></li>
+                    {% if available_games.has_next %}
+                        <li class="page-item"><span>
+                            <a class="page-link" href="?page={{available_games.number}}"> > </a>
+                        </span></li>
+                    {% else %}
+                        <li class="page-item disabled"><span>
+                            <a class="page-link" href="#"> > </a>
+                        </span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        {% else %}
+            No hay juegos disponibles... Usa el menú para iniciar uno y busca un amigo!
+        {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+<div id="content-logout" class="content content__inner">
+
+    <h2 class="content__title"> Adiós, {{ user }}! </h2>
+    <br/>
+    <h3 class="content__info">Sesión cerrada con éxito. Te echaremos de menos! Disfruta la Navidad :)</h3>
+    <h3 class="content__info"><a href="{% url 'landing' %}"> Volver a inicio </a></h3>
+</div>
+{% endblock content %}

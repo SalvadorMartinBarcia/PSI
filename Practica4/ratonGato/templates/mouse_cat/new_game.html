@@ -1,0 +1,14 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+<div id="content-creategame" class="content content__inner">
+
+    <h2 class="content__title"> Juego creado! </h2>
+    <br/>
+    <p class="content__info">Iniciaste un juego como avalancha, con ID <b>{{ game.id }}</b>.</p>
+    <br>
+    <p class="content__info">Podrás unirte al mismo en el cuando haya algún alpinista!</p>
+
+    <h3 class="content__info"><a href="{% url 'landing' %}"> Volver a inicio </a></h3>
+</div>
+{% endblock content %}

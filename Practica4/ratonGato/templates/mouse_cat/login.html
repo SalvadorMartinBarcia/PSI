@@ -1,0 +1,24 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+
+<div id="content-login" class="content content__inner">
+
+    <h2 class="content__title"> Iniciar Sesión </h2>
+    <h3 class="content__subtitle"> Introduce tus credenciales </h3>
+    <br/>
+
+    <form id="login_form" class="form-container" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div align="right">
+            {{ user_form.as_p }}
+        </div>
+        <br/>
+        <input type="hidden" name="return_service" value="{{ return_service }}" />
+        <div class="button_container">
+            <button type="submit" id="login-button" class="btn"><span> Adelante! </span></button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

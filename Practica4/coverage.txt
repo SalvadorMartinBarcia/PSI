@@ -1,0 +1,28 @@
+Comentarios en la memoria
+
+Name                                   Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------
+datamodel/__init__.py                      0      0   100%
+datamodel/admin.py                         5      0   100%
+datamodel/apps.py                          3      3     0%   1-5
+datamodel/constants.py                    14      0   100%
+datamodel/migrations/0001_initial.py       8      0   100%
+datamodel/migrations/__init__.py           0      0   100%
+datamodel/models.py                      153     23    85%   24-27, 87-92, 117-118, 128-133, 136-137, 143-144, 163, 165, 175-178
+datamodel/views.py                         1      1     0%   1
+logic/__init__.py                          0      0   100%
+logic/admin.py                             1      1     0%   1
+logic/apps.py                              3      3     0%   1-5
+logic/forms.py                            34      0   100%
+logic/migrations/__init__.py               0      0   100%
+logic/models.py                            1      1     0%   1
+logic/urls.py                              4      0   100%
+logic/views.py                           322    168    48%   103-104, 123, 141-165, 169-186, 190-217, 223-248, 254-260, 278, 298-318, 333-334, 353-369, 427-520
+manage.py                                 12      2    83%   11-12
+ratonGato/__init__.py                      0      0   100%
+ratonGato/settings.py                     29      1    97%   84
+ratonGato/urls.py                          4      0   100%
+ratonGato/wsgi.py                          5      5     0%   10-17
+--------------------------------------------------------------------
+TOTAL                                    599    208    65%
+

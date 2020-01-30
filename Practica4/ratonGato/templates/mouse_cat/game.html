@@ -1,0 +1,116 @@
+{% extends "mouse_cat/base.html" %}
+{% load staticfiles %}
+
+{% block extra_js %}
+<script type="text/javascript">
+
+    var origen; var origen_tipo; var destino; var destino_tipo;
+
+    function allowDrop(ev){ev.preventDefault();}
+    function inicio(ev){origen = ev.target.parentElement.id; origen_tipo = ev.target.className;}
+
+    function fin(ev){
+        ev.preventDefault(); destino = ev.target.id; destino_tipo = ev.target.className;
+
+        if (parseInt(destino) < parseInt(0)){
+            destino = ev.target.parentElement.id;
+        }
+        // Si no es tu turno no te deja jugar
+        if ("{{game.cat_turn}}" == "False" && {{game.cat_user.id}} == {{request.user.id}}){
+            return;
+        }
+        if ("{{game.cat_turn}}" == "True" && {{game.mouse_user.id}} == {{request.user.id}}){
+            return;
+        }
+        // Si origen es destino salimos también
+        if (origen == destino){
+            return;
+        }
+        if (origen_tipo == "snowcell"){
+            if (destino_tipo == "snowcell"){
+                return;
+            }
+            if (((parseInt(origen)+parseInt(7)) != parseInt(destino)) && ((parseInt(origen)+parseInt(9)) != parseInt(destino))){
+                return;
+            }
+        }
+        if (origen_tipo == "adventurer"){
+            if (((parseInt(origen)+parseInt(7)) != parseInt(destino)) && ((parseInt(origen)+parseInt(9)) != parseInt(destino)) && ((parseInt(origen)-parseInt(7)) != parseInt(destino)) && ((parseInt(origen)-parseInt(9)) != parseInt(destino))){
+                return;
+            }
+        }
+        $("#id_origin").val(origen); $("#id_target").val(destino); $("#move_form").submit();
+    }
+
+</script>
+<script type="text/javascript">
+    function loadBoard(){
+        $.ajax({
+            url: "load_board/" + {{ game.id }} + "/",
+            success: function(data) {
+                {% if game.status != 2 %}
+                    //la idea es que si no está activa, te devuelva a index tras poco tiempo (finalizada), pero NO FUNCIONA AUN
+                    window.location.href = 'index';
+                {% else %}
+                    var doc = new DOMParser().parseFromString(data, "text/html");
+                    document.getElementById("chess_board").innerHTML = doc.getElementById("chess_board").innerHTML;
+                {% endif %}
+            },
+            error: function(){
+                document.getElementById("waiting").innerHTML = "<h3 class='content__info text-center'>Ups, error...</h3>";
+            }
+        })
+    }
+
+    setInterval(function(){
+        loadBoard()
+    }, 5000);
+</script>
+
+{% endblock extra_js %}
+
+{% block content %}
+
+<div id="content-game" class="content content__inner">
+    {% if game.status == 2 %}
+        <h3 class="content__subtitle"> Juego en activo - (ID {{ game.id }}) </h3>
+        <h3 class="content__smalltitle">
+            <img src="{% static 'img/snowball.png' %}" class="snowcell snowcell-big" draggable="false">
+            <b style="text-transform: uppercase;">{{ game.cat_user.username }} VS {{ game.mouse_user.username }}</b>
+            <img src="{% static 'img/alpinista.png' %}" class="adventurer adventurer-big" draggable="false">
+        </h3>
+        <div id="chess_board">
+            <div class="loader">
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__ball"></div>
+            </div>
+        </div>
+    {% elif game.status == 1 %}
+        <h2 class="content__subtitle"> Juego creado! </h2>
+        <h3 class="content__smalltitle"> La avalancha {{ game.cat_user.username }} espera pacientemente... </h3>
+    {% else %}
+        <h2 class="content__smalltitle"> La partida es para... </h2>
+        {% if game.status == 3 %}
+                <h3 class="content__subtitle"> {{ game.mouse_user.username }} </h3>
+            {% if game.mouse_user == request.user %}
+                <h2 class="content__smalltitle"> ENHORABUENA! </h2>
+            {% elif game.mouse_user != request.user %}
+                <h2 class="content__smalltitle"> La proxima vez será, &nbsp{{ game.cat_user.username }}... </h2>
+            {% endif %}
+        {% elif game.status == 4 %}
+                <h3 class="content__subtitle"> {{ game.cat_user.username }} </h3>
+            {% if game.cat_user == request.user %}
+                <h2 class="content__smalltitle"> ENHORABUENA! </h2>
+            {% elif game.cat_user != request.user %}
+                <h2 class="content__smalltitle"> La proxima vez será, &nbsp{{ game.mouse_user.username }}... </h2>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "mouse_cat/base.html" %}
+
+{% block content %}
+<div id="content-error" class="content content__inner">
+
+    <h2 class="content__title"> Hubo un error, compañero... </h2>
+    <br>
+    <p class="content__info">Este es el feedback que tenemos al respecto:</p>
+    <br>
+    <p class="content__error">{{ msg_error }}</p>
+    <br>
+    <p class="content__info">Lamentamos esta incómoda situación :/</p>
+
+    <h3 class="content__info"><a href="{% url 'landing' %}"> Volver a inicio </a></h3>
+</div>
+
+{% endblock content %}

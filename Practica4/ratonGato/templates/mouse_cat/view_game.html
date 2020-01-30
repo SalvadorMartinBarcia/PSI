@@ -1,0 +1,83 @@
+{% extends "mouse_cat/base.html" %}
+{% load staticfiles %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    var shift=0; var swap; var next;
+
+    function play(){next = setInterval(forwShift, 2000);}
+    function stop(){clearInterval(next);}
+    function backShift(){shift=2; makeMove();}
+    function forwShift(){shift=1;  makeMove();}
+
+    function makeMove(){
+        $.ajax({
+            url: "get_moves_service/" + shift + "/",
+            success: function(data) {
+                if( data['target'] == -5 ){
+                    alert("Movimiento no permitido");
+                }
+                else{
+                    swap = document.getElementById(data['target']).innerHTML;
+                    document.getElementById(data['target']).innerHTML = document.getElementById(data['origin']).innerHTML;
+                    document.getElementById(data['origin']).innerHTML = swap;
+                }
+                if( data['next'] == 0){
+                        {% if request.user.id == game.cat_user.id and game.status == 4 or request.user.id == game.mouse_user.id and game.status == 3 %}
+                             alert("Victoria para el jugador: {{ request.user.username }}");
+                        {% elif request.user.id == game.mouse_user.id %}
+                             alert("Victoria para el jugador: {{ game.cat_user.username }}");
+                        {% else %}
+                             alert("Victoria para el jugador: {{ game.mouse_user.username }}");
+                        {% endif %}
+
+                }
+            },
+            error: function(){
+                alert("Algo ocurrió :/");
+            }
+        })
+    }
+</script>
+
+{% endblock extra_js %}
+
+{% block content %}
+<div id="content-viewgame" class="content content__inner">
+    <h3 class="content__subtitle"> Reviviendo una vieja partida... </h3>
+    <h3 class="content__smalltitle">
+        <img src="{% static 'img/snowball.png' %}" class="snowcell snowcell-big" draggable="false">
+        <b style="text-transform: uppercase;">{{ game.cat_user.username }} VS {{ game.mouse_user.username }}</b>
+        <img src="{% static 'img/alpinista.png' %}" class="adventurer adventurer-big" draggable="false">
+    </h3>
+    {% if game.status != 3 and game.status != 4 %}
+        <hr>
+        <h2 class="content__smalltitle"> EL JUEGO CONTINÚA!</h2>
+        <h2 class="content__smalltitle"> Cuando acabe podrás verlo! </h2>
+    {% elif game.status == 3 or game.status == 4 %}
+        {% if board %}
+            <div class="play-menu">
+                <button class="btn play-button" onclick="backShift()"><span><i class="glyphicon glyphicon-backward"></i></span></button>
+                <button class="btn play-button" onclick="play()"><span><i class="glyphicon glyphicon-play"></i></span></button>
+                <button class="btn play-button" onclick="stop()"><span><i class="glyphicon glyphicon-pause"></i></span></button>
+                <button class="btn play-button" onclick="forwShift()"><span><i class="glyphicon glyphicon-forward"></i></span></button>
+            </div>
+            <hr>
+            <table id="chess_board" style="border-style:solid; border-width: 0.5vh;">
+            {% for item in board %}
+                {% if forloop.counter0|divisibleby:8 %}<tr>{% endif %}
+                <td id="{{ forloop.counter0 }}" class="td" style="width:3.5vw; height:3.5vw; background-color:snow; text-align:center;" ondrop="fin(event)" ondragover="allowDrop(event)">
+                    {% if item == -2 %} <img src="{% static 'img/tree.svg' %}" class="treecell" draggable="false"> <!-- ARBOL -->
+                    {% elif item == 1 %}  <img src="{% static 'img/snowball.png' %}" class="snowcell" draggable="false" > <!-- Bola de nieve -->
+                    {% elif item == -1 %}  <img src="{% static 'img/alpinista.png' %}" class="adventurer" draggable="false">
+                    {% else %} <p></p>
+                    {% endif %}
+                </td>
+                {% if forloop.counter|divisibleby:8 or forloop.last %}</tr>{% endif %}
+            {% endfor %}
+            </table>
+        {% endif %}
+    {% endif %}
+</div>
+
+{% endblock content %}
