@@ -1,0 +1,266 @@
+lou@lou-ubu:~/Desktop/workspace/tango_with_django_project$ python3 ./manage.py test rango.tests.GeneralTests
+Creating test database for alias 'default'...
+Got an error creating the test database: database "test_psi" already exists
+
+Type 'yes' if you would like to try deleting the test database 'test_psi', or 'no' to cancel: yes
+Destroying old test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.009s
+
+OK
+Destroying test database for alias 'default'...
+lou@lou-ubu:~/Desktop/workspace/tango_with_django_project$ python3 ./manage.py test rango.tests.IndexPageTests --keepdb -v 3
+Using existing test database for alias 'default' ('test_psi')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, rango, sessions
+Running pre-migrate handlers for application admin
+Running pre-migrate handlers for application auth
+Running pre-migrate handlers for application contenttypes
+Running pre-migrate handlers for application sessions
+Running pre-migrate handlers for application rango
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK (0.039s)
+  Applying auth.0001_initial... OK (0.201s)
+  Applying admin.0001_initial... OK (0.075s)
+  Applying admin.0002_logentry_remove_auto_add... OK (0.025s)
+  Applying admin.0003_logentry_add_action_flag_choices... OK (0.027s)
+  Applying contenttypes.0002_remove_content_type_name... OK (0.069s)
+  Applying auth.0002_alter_permission_name_max_length... OK (0.021s)
+  Applying auth.0003_alter_user_email_max_length... OK (0.045s)
+  Applying auth.0004_alter_user_username_opts... OK (0.035s)
+  Applying auth.0005_alter_user_last_login_null... OK (0.028s)
+  Applying auth.0006_require_contenttypes_0002... OK (0.011s)
+  Applying auth.0007_alter_validators_add_error_messages... OK (0.033s)
+  Applying auth.0008_alter_user_username_max_length... OK (0.101s)
+  Applying auth.0009_alter_user_last_name_max_length... OK (0.052s)
+  Applying rango.0001_initial... OK (0.070s)
+  Applying rango.0002_auto_20191006_1856... OK (0.082s)
+  Applying rango.0003_auto_20191006_1957... OK (0.081s)
+  Applying rango.0004_auto_20191006_2043... OK (0.062s)
+  Applying sessions.0001_initial... OK (0.051s)
+Running post-migrate handlers for application admin
+Adding permission 'Permission object (1)'
+Adding permission 'Permission object (2)'
+Adding permission 'Permission object (3)'
+Adding permission 'Permission object (4)'
+Running post-migrate handlers for application auth
+Adding permission 'Permission object (5)'
+Adding permission 'Permission object (6)'
+Adding permission 'Permission object (7)'
+Adding permission 'Permission object (8)'
+Adding permission 'Permission object (9)'
+Adding permission 'Permission object (10)'
+Adding permission 'Permission object (11)'
+Adding permission 'Permission object (12)'
+Adding permission 'Permission object (13)'
+Adding permission 'Permission object (14)'
+Adding permission 'Permission object (15)'
+Adding permission 'Permission object (16)'
+Running post-migrate handlers for application contenttypes
+Adding permission 'Permission object (17)'
+Adding permission 'Permission object (18)'
+Adding permission 'Permission object (19)'
+Adding permission 'Permission object (20)'
+Running post-migrate handlers for application sessions
+Adding permission 'Permission object (21)'
+Adding permission 'Permission object (22)'
+Adding permission 'Permission object (23)'
+Adding permission 'Permission object (24)'
+Running post-migrate handlers for application rango
+Adding permission 'Permission object (25)'
+Adding permission 'Permission object (26)'
+Adding permission 'Permission object (27)'
+Adding permission 'Permission object (28)'
+Adding permission 'Permission object (29)'
+Adding permission 'Permission object (30)'
+Adding permission 'Permission object (31)'
+Adding permission 'Permission object (32)'
+System check identified no issues (0 silenced).
+test_index_contains_hello_message (rango.tests_first_day.IndexPageTests) ... ok
+test_index_has_title (rango.tests_first_day.IndexPageTests) ... ok
+test_index_using_template (rango.tests_first_day.IndexPageTests) ... ok
+test_rango_picture_displayed (rango.tests_first_day.IndexPageTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.174s
+
+OK
+Preserving test database for alias 'default' ('test_psi')...
+lou@lou-ubu:~/Desktop/workspace/tango_with_django_project$ python3 ./manage.py test rango.tests.AboutPageTests --keepdb -v 3
+Using existing test database for alias 'default' ('test_psi')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, rango, sessions
+Running pre-migrate handlers for application admin
+Running pre-migrate handlers for application auth
+Running pre-migrate handlers for application contenttypes
+Running pre-migrate handlers for application sessions
+Running pre-migrate handlers for application rango
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  No migrations to apply.
+Running post-migrate handlers for application admin
+Running post-migrate handlers for application auth
+Running post-migrate handlers for application contenttypes
+Running post-migrate handlers for application sessions
+Running post-migrate handlers for application rango
+System check identified no issues (0 silenced).
+test_about_contain_image (rango.tests_first_day.AboutPageTests) ... ok
+test_about_contains_create_message (rango.tests_first_day.AboutPageTests) ... ok
+test_about_using_template (rango.tests_first_day.AboutPageTests) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.099s
+
+OK
+Preserving test database for alias 'default' ('test_psi')...
+lou@lou-ubu:~/Desktop/workspace/tango_with_django_project$ python3 ./manage.py test rango.tests.ModelTests --keepdb -v 3
+Using existing test database for alias 'default' ('test_psi')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, rango, sessions
+Running pre-migrate handlers for application admin
+Running pre-migrate handlers for application auth
+Running pre-migrate handlers for application contenttypes
+Running pre-migrate handlers for application sessions
+Running pre-migrate handlers for application rango
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  No migrations to apply.
+Running post-migrate handlers for application admin
+Running post-migrate handlers for application auth
+Running post-migrate handlers for application contenttypes
+Running post-migrate handlers for application sessions
+Running post-migrate handlers for application rango
+System check identified no issues (0 silenced).
+test_python_cat_added (rango.tests_second_day.ModelTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+ok
+test_python_cat_with_likes (rango.tests_second_day.ModelTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+ok
+test_python_cat_with_views (rango.tests_second_day.ModelTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.526s
+
+OK
+Preserving test database for alias 'default' ('test_psi')...
+lou@lou-ubu:~/Desktop/workspace/tango_with_django_project$ python3 ./manage.py test rango.tests.Chapter5ViewTests --keepdb -v 3
+Using existing test database for alias 'default' ('test_psi')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, rango, sessions
+Running pre-migrate handlers for application admin
+Running pre-migrate handlers for application auth
+Running pre-migrate handlers for application contenttypes
+Running pre-migrate handlers for application sessions
+Running pre-migrate handlers for application rango
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  No migrations to apply.
+Running post-migrate handlers for application admin
+Running post-migrate handlers for application auth
+Running post-migrate handlers for application contenttypes
+Running post-migrate handlers for application sessions
+Running post-migrate handlers for application rango
+System check identified no issues (0 silenced).
+test_admin_interface_page_view (rango.tests_second_day.Chapter5ViewTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+ok
+test_python_cat_added (rango.tests_second_day.Chapter5ViewTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+name= Python
+nameCAt= Python
+ok
+test_python_cat_with_likes (rango.tests_second_day.Chapter5ViewTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+name= Python
+nameCAt= Python
+ok
+test_python_cat_with_views (rango.tests_second_day.Chapter5ViewTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+name= Python
+nameCAt= Python
+ok
+test_show_category (rango.tests_second_day.Chapter5ViewTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+ok
+test_view_has_title (rango.tests_second_day.Chapter5ViewTests) ... - Python - Learn Python in 10 Minutes
+- Python - How to Think like a Computer Scientist
+- Python - Official Python Tutorial
+- Django - How to Tango with Django
+- Django - Django Rocks
+- Django - Official Django Tutorial
+- Other Frameworks - Flask
+- Other Frameworks - Bottle
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.821s
+
+OK
+Preserving test database for alias 'default' ('test_psi')...
+lou@lou-ubu:~/Desktop/workspace/tango_with_django_project$ 
